@@ -6,8 +6,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
 
 import type { Route } from "./+types/root";
+import "@mantine/core/styles.css";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -19,9 +21,14 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap",
   },
 ];
+
+const theme = createTheme({
+  fontFamily: '"Open Sans", sans-serif',
+  headings: { fontFamily: '"Ubuntu", sans-serif' },
+});
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -29,11 +36,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <ColorSchemeScript />
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
+        <MantineProvider theme={theme} defaultColorScheme="dark">
+          {children}
+        </MantineProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
