@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Ubuntu } from "next/font/google";
 import "@mantine/core/styles.css";
+import "@mantine/dropzone/styles.css";
 import {
   ColorSchemeScript,
   createTheme,
