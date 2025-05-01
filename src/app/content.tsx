@@ -1,13 +1,14 @@
 "use client";
 import { FileSelector } from "@/components/FileSelector";
-import { Button, Center, Stack, Text } from "@mantine/core";
+import { Button, Center, Grid, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { Vehicle } from "./api/route";
 
 export function HomePage() {
   const [file, setFile] = useState<File | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [response, setResponse] = useState<string>("");
+  const [response, setResponse] = useState<Vehicle>();
 
   useEffect(() => {
     if (file) {
@@ -18,7 +19,7 @@ export function HomePage() {
   }, [file]);
 
   async function fetchBlob() {
-    setResponse("");
+    setResponse(undefined);
     setIsLoading(true);
     try {
       const response = await fetch("/api", {
@@ -32,8 +33,8 @@ export function HomePage() {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      const json = await response.json();
-      setResponse(json.response);
+      const vehicle = (await response.json()) as Vehicle;
+      setResponse(vehicle);
     } finally {
       setIsLoading(false);
     }
@@ -44,11 +45,20 @@ export function HomePage() {
       <Stack>
         <FileSelector file={file} onSelectFile={setFile} />
         <Button onClick={fetchBlob} loading={isLoading}>
-          What is this image
+          Which vehicle is this?
         </Button>
-        <Text maw={"1000px"} ta={"center"}>
-          {response}
-        </Text>
+        {response && (
+          <Grid>
+            <Grid.Col span={6}>Brand</Grid.Col>
+            <Grid.Col span={6}>{response.brand}</Grid.Col>
+            <Grid.Col span={6}>Model</Grid.Col>
+            <Grid.Col span={6}>{response.model}</Grid.Col>
+            <Grid.Col span={6}>Year</Grid.Col>
+            <Grid.Col span={6}>{response.year}</Grid.Col>
+            <Grid.Col span={6}>Color</Grid.Col>
+            <Grid.Col span={6}>{response.color}</Grid.Col>
+          </Grid>
+        )}
       </Stack>
     </Center>
   );
