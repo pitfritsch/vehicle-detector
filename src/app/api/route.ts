@@ -27,7 +27,7 @@ export async function POST(req: Request) {
         content: [
           {
             type: "input_text",
-            text: "Extract the vehicle details from the following image",
+            text: "Extract the vehicle details from the following image, upper case first letter of all properties",
           },
           {
             type: "input_image",

@@ -1,6 +1,6 @@
 "use client";
 import { FileSelector } from "@/components/FileSelector";
-import { Button, Center, Grid, Stack, Text } from "@mantine/core";
+import { Button, Center, Group, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { Vehicle } from "./api/route";
 
@@ -41,23 +41,32 @@ export function HomePage() {
   }
 
   return (
-    <Center>
+    <Center p={"lg"}>
       <Stack>
         <FileSelector file={file} onSelectFile={setFile} />
         <Button onClick={fetchBlob} loading={isLoading}>
           Which vehicle is this?
         </Button>
         {response && (
-          <Grid>
-            <Grid.Col span={6}>Brand</Grid.Col>
-            <Grid.Col span={6}>{response.brand}</Grid.Col>
-            <Grid.Col span={6}>Model</Grid.Col>
-            <Grid.Col span={6}>{response.model}</Grid.Col>
-            <Grid.Col span={6}>Year</Grid.Col>
-            <Grid.Col span={6}>{response.year}</Grid.Col>
-            <Grid.Col span={6}>Color</Grid.Col>
-            <Grid.Col span={6}>{response.color}</Grid.Col>
-          </Grid>
+          <Stack bg="gray" p="md">
+            <Group>
+              <Text flex={1}>Brand</Text>
+              <Text flex={1}>{response.brand}</Text>
+            </Group>
+
+            <Group>
+              <Text flex={1}>Model</Text>
+              <Text flex={1}>{response.model}</Text>
+            </Group>
+            <Group>
+              <Text flex={1}>Year</Text>
+              <Text flex={1}>{response.year}</Text>
+            </Group>
+            <Group>
+              <Text flex={1}>Color</Text>
+              <Text flex={1}>{response.color}</Text>
+            </Group>
+          </Stack>
         )}
       </Stack>
     </Center>
