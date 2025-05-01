@@ -80,6 +80,7 @@ export function HomePage() {
                 align="center"
                 h="100%"
                 gap="xl"
+                p="md"
                 mih={220}
                 style={{ pointerEvents: "none" }}
               >
@@ -105,23 +106,18 @@ export function HomePage() {
                   />
                 </Dropzone.Idle>
 
-                <div>
-                  <Text size="xl" inline>
-                    Drag images here or click to select files
-                  </Text>
-                  <Text size="sm" c="dimmed" inline mt={7}>
-                    Attach as many files as you like, each file should not
-                    exceed 5mb
-                  </Text>
-                </div>
+                <Text size="xl" ta="center" fw={600}>
+                  Drag image here or click to select file
+                </Text>
               </Group>
             )}
           </Dropzone>
         </Card.Section>
 
         <Stack p="md">
-          <Skeleton height={25} hidden={!isLoading} />
-          {!isLoading && (
+          {isLoading ? (
+            <Skeleton height={25} />
+          ) : (
             <Group>
               <Text fw={500} flex={1}>
                 Brand
@@ -130,8 +126,9 @@ export function HomePage() {
             </Group>
           )}
 
-          <Skeleton height={25} hidden={!isLoading} />
-          {!isLoading && (
+          {isLoading ? (
+            <Skeleton height={25} />
+          ) : (
             <Group>
               <Text fw={500} flex={1}>
                 Model
@@ -140,8 +137,9 @@ export function HomePage() {
             </Group>
           )}
 
-          <Skeleton height={25} hidden={!isLoading} />
-          {!isLoading && (
+          {isLoading ? (
+            <Skeleton height={25} />
+          ) : (
             <Group>
               <Text fw={500} flex={1}>
                 Year
@@ -150,8 +148,9 @@ export function HomePage() {
             </Group>
           )}
 
-          <Skeleton height={25} hidden={!isLoading} />
-          {!isLoading && (
+          {isLoading ? (
+            <Skeleton height={25} />
+          ) : (
             <Group>
               <Text fw={500} flex={1}>
                 Color
