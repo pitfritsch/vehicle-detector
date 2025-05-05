@@ -64,7 +64,7 @@ export function HomePage() {
             }}
           >
             {file ? (
-              <Image src={imageUrl} h="100%" />
+              <Image src={imageUrl} h="100%" alt="your image" />
             ) : (
               <Group
                 justify="center"
@@ -108,9 +108,9 @@ export function HomePage() {
         <Stack p="md">
           {response &&
             Object.entries(response).map(([key, value]) => {
-              console.log(key);
               return (
                 <Attribute
+                  key={key}
                   isLoading={isLoading}
                   attribute={key}
                   value={value}
