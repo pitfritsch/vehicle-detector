@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Vehicle } from "./api/route";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { IconPhoto, IconUpload, IconX } from "@tabler/icons-react";
+import Attribute from "@/components/Attribute";
 
 export function HomePage() {
   const [file, setFile] = useState<File | null>(null);
@@ -35,7 +36,6 @@ export function HomePage() {
   }, [file]);
 
   async function fetchBlob() {
-    setResponse(undefined);
     setIsLoading(true);
     try {
       const response = await fetch("/api", {
@@ -115,49 +115,17 @@ export function HomePage() {
         </Card.Section>
 
         <Stack p="md">
-          {isLoading ? (
-            <Skeleton height={25} />
-          ) : (
-            <Group>
-              <Text fw={500} flex={1}>
-                Brand
-              </Text>
-              <Text flex={1}>{response?.brand}</Text>
-            </Group>
-          )}
-
-          {isLoading ? (
-            <Skeleton height={25} />
-          ) : (
-            <Group>
-              <Text fw={500} flex={1}>
-                Model
-              </Text>
-              <Text flex={1}>{response?.model}</Text>
-            </Group>
-          )}
-
-          {isLoading ? (
-            <Skeleton height={25} />
-          ) : (
-            <Group>
-              <Text fw={500} flex={1}>
-                Year
-              </Text>
-              <Text flex={1}>{response?.year}</Text>
-            </Group>
-          )}
-
-          {isLoading ? (
-            <Skeleton height={25} />
-          ) : (
-            <Group>
-              <Text fw={500} flex={1}>
-                Color
-              </Text>
-              <Text flex={1}>{response?.color}</Text>
-            </Group>
-          )}
+          {response &&
+            Object.entries(response).map(([key, value]) => {
+              console.log(key);
+              return (
+                <Attribute
+                  isLoading={isLoading}
+                  attribute={key}
+                  value={value}
+                />
+              );
+            })}
         </Stack>
 
         <Button

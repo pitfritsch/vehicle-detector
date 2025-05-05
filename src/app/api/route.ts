@@ -11,6 +11,7 @@ const VehicleSchema = z.object({
   model: z.string(),
   year: z.number(),
   color: z.string(),
+  confidence: z.string(),
 });
 
 export type Vehicle = z.infer<typeof VehicleSchema>;
@@ -27,7 +28,7 @@ export async function POST(req: Request) {
         content: [
           {
             type: "input_text",
-            text: "Extract the vehicle details from the following image, upper case first letter of all properties",
+            text: "Extract the vehicle details from the following image, upper case first letter of all properties, make sure to return a confidence score from 0% to 100%",
           },
           {
             type: "input_image",
