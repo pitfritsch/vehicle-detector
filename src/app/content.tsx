@@ -1,14 +1,5 @@
 "use client";
-import {
-  Button,
-  Card,
-  Center,
-  Group,
-  Image,
-  Skeleton,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Button, Card, Center, Group, Image, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { Vehicle } from "./api/route";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
